@@ -26,11 +26,17 @@ public class Display {
 		display.setLocationRelativeTo(null);
 		display.setVisible(true);
 		
+
+		
 		canvas = new Canvas();
 		canvas.setPreferredSize(new Dimension(width, height));
 		canvas.setMaximumSize(new Dimension(width, height));
 		canvas.setMinimumSize(new Dimension(width, height));
 		display.add(canvas);
+		canvas.requestFocus();
+		
+		if(canvas.getBufferStrategy() == null)
+			canvas.createBufferStrategy(3);
 
 		display.pack();
 		

@@ -1,29 +1,35 @@
 package main;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import gamestates.GameStateManager;
+import keyManager.KeyManager;
+
 public class Game implements Runnable {
+	
+	private final String title = "Generic RPG Game";
 
-
+	private static Game game;
 	private Display display;
 	private Graphics g;
 	private BufferStrategy bs;
 	private Boolean running = false;
-	private long lastTime;
-	private long currentTime;
-	private int FPS = 60;
-	private int currentFPS = 0;
+	private static long lastTime;
+	private static long currentTime;
+	private static int FPS = 60;
+	private static int currentFPS;
 	
-	private int blockX = 0;
-	private int blockY = 100;
-	private Color blockColor = Color.BLACK;
+//	private int blockX = 0;
+//	private int blockY = 100;
+//	private Color blockColor = Color.BLACK;
+	
+	private GameStateManager gameStateManager;
+	private KeyManager keyManager;
 	
 	
 	public Game() {
-		display = new Display("Test game", 960, 720);
+		display = new Display(title, 960, 720);
 		run();
 	}
 
@@ -32,6 +38,7 @@ public class Game implements Runnable {
 		init();
 
 		lastTime = System.nanoTime();
+		currentFPS = 0;
 		
 		while(running) {
 			currentTime = System.nanoTime();
@@ -41,23 +48,27 @@ public class Game implements Runnable {
 				render();
 				lastTime = currentTime;
 			}
-		}	
+		}
+		System.exit(0);
 	}
 	
 	
 	private void init() {
-		display.getCanvas().createBufferStrategy(3);
 		running = true;
+		game = this;
+		gameStateManager = new GameStateManager();
+		keyManager = new KeyManager();
+
 	}
 	
 	
 	private void update() {
-		blockX+=3;
-		blockX%=display.getWidth();
+//		blockX+=3;
+//		blockX%=display.getWidth();
+//		blockY = 100 + (int) (30*Math.sin(2*blockX));
+//		blockColor = new Color( (blockColor.getRGB()-500)%-(256*256*256) );
 		
-		blockY = 100 + (int) (30*Math.sin(2*blockX));
-		
-		blockColor = new Color( (blockColor.getRGB()-500)%-(256*256*256) );
+		gameStateManager.update();
 		
 	}
 
@@ -66,23 +77,56 @@ public class Game implements Runnable {
 		g = bs.getDrawGraphics();
 		g.clearRect(0, 0, display.getWidth(), display.getHeight()); //clear screen
 		       
-		g.setColor(Color.GREEN);
-		g.fillRect(0, 0, display.getWidth(), display.getHeight());
-		g.setColor(blockColor);
-		g.fillRect(blockX, blockY, 150, 150);
+//		g.setColor(Color.GREEN);
+//		g.fillRect(0, 0, display.getWidth(), display.getHeight());
+//		g.setColor(blockColor);
+//		g.fillRect(blockX, blockY, 150, 150);
+//		
+//		g.setColor(Color.black);
+//		g.setFont(new Font(g.getFont().getFontName(), Font.BOLD, 20));
+//		g.drawString("FPS: "+currentFPS, 10, 50);
 		
-		g.setColor(Color.black);
-		g.setFont(new Font(g.getFont().getFontName(), Font.BOLD, 20));
-		g.drawString("FPS: "+currentFPS, 10, 50);
+		
+		gameStateManager.render();
+		
 		
 		bs.show();	//draw on the screen
 		g.dispose(); //dispose graphics object
-		
+	}
+	
+	public void exit() {
+		running = false;
+	}
+	
+	
+	//getters and setters
+	
+	public static Game getHandler() {
+		return game;
+	}
+	
+	public GameStateManager getGameStateManager() {
+		return gameStateManager;
+	}
+	
+	public KeyManager getKeyManager() {
+		return keyManager;
 	}
 
 	public Display getDisplay() {
 		return display;
 	}
-
+	
+	public Graphics getGraphics() {
+		return g;
+	}
+	
+	public int getFPS() {
+		return currentFPS;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
 
 }
