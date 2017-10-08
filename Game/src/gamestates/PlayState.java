@@ -3,11 +3,11 @@ package gamestates;
 import entities.EntityManager;
 import entities.Player;
 
-public class GameState extends State {
+public class PlayState extends State {
 	
 	private EntityManager entityManager;
 	
-	public GameState() {
+	public PlayState() {
 		entityManager = new EntityManager();
 		
 		

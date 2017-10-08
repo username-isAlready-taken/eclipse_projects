@@ -22,7 +22,8 @@ public class KeyManager implements KeyListener {
 				keyCode == KeyEvent.VK_UP ||
 				keyCode == KeyEvent.VK_LEFT ||
 				keyCode == KeyEvent.VK_RIGHT ||
-				keyCode == KeyEvent.VK_ENTER)
+				keyCode == KeyEvent.VK_ENTER ||
+				keyCode == KeyEvent.VK_ESCAPE)
 			return true;
 		return false;
 	}
@@ -42,6 +43,7 @@ public class KeyManager implements KeyListener {
 		int keyCode = e.getKeyCode();
 		if(validKey(keyCode))
 			keys[keyCode] = false;
+			pressedOnce[keyCode] = false;
 	}
 
 	@Override

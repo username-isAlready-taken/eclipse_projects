@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 import main.Game;
+import gamestates.GameStateManager;
+import gamestates.GameStates;
 
 public class Player extends Creature {
 	
@@ -20,12 +22,14 @@ public class Player extends Creature {
 //		this.y+=speed;
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_DOWN))
 			this.y+=speed;
-		else if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_UP))
+		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_UP))
 			this.y-=speed;
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_RIGHT))
 			this.x+=speed;
-		else if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_LEFT))
+		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_LEFT))
 			this.x-=speed;
+		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_ESCAPE))
+			Game.getHandler().getGameStateManager().switchState(GameStates.MENUSTATE);
 		
 	}
 
