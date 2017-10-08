@@ -7,13 +7,32 @@ import main.Game;
 
 public class KeyManager implements KeyListener {
 	
-	private boolean[] keys, pressedOnce;
+	private boolean[] keys;
 	
 	public KeyManager() {
 		keys = new boolean[256];
-		pressedOnce = new boolean[256];
 		Game.getHandler().getDisplay().getCanvas().addKeyListener(this);
 	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		int keyCode = e.getKeyCode();
+		if(validKey(keyCode)) {
+			keys[keyCode] = true;
+		}
+
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		int keyCode = e.getKeyCode();
+		if(validKey(keyCode))
+			keys[keyCode] = false;
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {}
+	
 	
 	private boolean validKey(int keyCode) {
 		if(keyCode<0 || keyCode>keys.length) 
@@ -27,28 +46,6 @@ public class KeyManager implements KeyListener {
 			return true;
 		return false;
 	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		int keyCode = e.getKeyCode();
-		if(validKey(keyCode)) {
-			keys[keyCode] = true;
-			pressedOnce[keyCode] = true;
-		}
-
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		int keyCode = e.getKeyCode();
-		if(validKey(keyCode))
-			keys[keyCode] = false;
-			pressedOnce[keyCode] = false;
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {}
-	
 	
 	//getters and setters
 	
@@ -61,10 +58,8 @@ public class KeyManager implements KeyListener {
 	}
 
 	public boolean getKeyPressedOnce(int keyCode) {
-		if(validKey(keyCode) == false)
-			return false;
-		if(pressedOnce[keyCode]) {
-			pressedOnce[keyCode] = false;
+		if(getKeyPressed(keyCode)) {
+			keys[keyCode] = false;
 			return true;
 		}
 		return false;
