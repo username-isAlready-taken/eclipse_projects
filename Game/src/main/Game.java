@@ -66,7 +66,7 @@ public class Game implements Runnable {
 		g = bs.getDrawGraphics();
 		g.clearRect(0, 0, display.getWidth(), display.getHeight()); //clear screen
 		       
-		g.setColor(Color.WHITE);
+		g.setColor(Color.GREEN);
 		g.fillRect(0, 0, display.getWidth(), display.getHeight());
 		g.setColor(blockColor);
 		g.fillRect(blockX, blockY, 150, 150);
