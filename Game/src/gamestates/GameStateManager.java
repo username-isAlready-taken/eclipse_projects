@@ -1,9 +1,5 @@
 package gamestates;
 
-enum GameStates {
-	MENUSTATE, GAMESTATE, SETTINGSSTATE, EXITSTATE;
-}
-
 
 public class GameStateManager {
 
@@ -23,8 +19,8 @@ public class GameStateManager {
 			setState(new MenuState());
 		else if(currentStateID == GameStates.SETTINGSSTATE)
 			setState(new MenuState());
-		else if(currentStateID == GameStates.GAMESTATE)
-			setState(new GameState());
+		else if(currentStateID == GameStates.PLAYSTATE)
+			setState(new PlayState());
 		else if(currentStateID == GameStates.EXITSTATE)
 			setState(new ExitState());
 		System.out.println("state switched to "+currentStateID);
@@ -43,6 +39,7 @@ public class GameStateManager {
 	}
 
 	private void setState(State state) {
+		currentState = null;
 		this.currentState = state;
 	}
 }
