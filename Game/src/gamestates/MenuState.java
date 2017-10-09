@@ -60,6 +60,9 @@ public class MenuState extends State {
 				Game.getHandler().getGameStateManager().switchState(GameStates.EXITSTATE);
 			}
 		}
+		else if(Game.getHandler().getKeyManager().getKeyPressedOnce(KeyEvent.VK_ESCAPE)) {
+			Game.getHandler().getGameStateManager().switchState(GameStates.EXITSTATE);
+		}
 		
 	}
 

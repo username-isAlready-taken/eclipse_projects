@@ -1,5 +1,6 @@
 package gamestates;
 
+import main.Game;
 
 public class GameStateManager {
 
@@ -14,6 +15,7 @@ public class GameStateManager {
 	public void switchState(GameStates id) {
 		if(currentStateID == id)
 			return;
+		Game.getHandler().getKeyManager().reset();
 		currentStateID = id;
 		if(currentStateID == GameStates.MENUSTATE)
 			setState(new MenuState());

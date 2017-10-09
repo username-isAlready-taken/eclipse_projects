@@ -37,6 +37,9 @@ public class ExitState extends State {
 			else
 				Game.getHandler().getGameStateManager().switchState(GameStates.MENUSTATE);
 		}
+		else if(Game.getHandler().getKeyManager().getKeyPressedOnce(KeyEvent.VK_ESCAPE)) {
+			Game.getHandler().getGameStateManager().switchState(GameStates.MENUSTATE);
+		}
 
 	}
 
