@@ -26,7 +26,7 @@ public class AssetManager {
 		new Tile(grassTile, TileType.GRASS);
 		new Tile(dirtTile, TileType.DIRT);
 		
-		tree = new Animation(makeTransparent(LoadImage("/treesprite.png"), new Color(255, 255, 255)), 0.8, 64, 64);
+		tree = new Animation(makeTransparent(LoadImage("/treesprite.png"), new Color(255, 255, 255)), 0.7, 64, 64);
 		
 	}
 	

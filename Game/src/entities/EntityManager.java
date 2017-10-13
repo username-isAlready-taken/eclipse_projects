@@ -13,7 +13,9 @@ public class EntityManager {
 		public int compare(Entity e1, Entity e2) {
 			if(e1.getY()+e1.getHeight() < e2.getY()+e2.getHeight())
 				return -1;
-			return 1;
+			else if(e1.getY()+e1.getHeight() > e2.getY()+e2.getHeight())
+				return 1;
+			return 0;
 		}
 	};
 
@@ -58,6 +60,10 @@ public class EntityManager {
 	
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public ArrayList<Entity> getEntities() {
+		return entities;
 	}
 	
 }

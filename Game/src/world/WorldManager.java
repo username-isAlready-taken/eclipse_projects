@@ -1,11 +1,16 @@
 package world;
 
+import entities.Player;
+import main.Game;
+
 public class WorldManager {
 	
-	private Camera camera = new Camera();
-	private World currentWorld = new World(25, 25);
+	private Camera camera;
+	private World currentWorld;
 	
 	public WorldManager() {
+		this.currentWorld = new World(75, 100);
+		this.camera = new Camera();
 		
 	}
 

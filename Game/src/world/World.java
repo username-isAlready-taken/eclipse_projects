@@ -11,15 +11,22 @@ public class World {
 	private int width; //width in tiles
 	private int height; //height in tiles
 	
+	private int spawnX = 800;
+	private int spawnY = 600;
+	
 	public World(int width, int height) {
 		this.width = width;
 		this.height = height;
 		
-		Game.getHandler().getEntityManager().addEntity(new Player(100, 100, 100, 40, 50));
+
+		Game.getHandler().getEntityManager().addEntity(new Player(100, spawnX, spawnY, 25, 32));
 		
-		Game.getHandler().getEntityManager().addEntity(new Tree(200, 200, 64, 64));
-		Game.getHandler().getEntityManager().addEntity(new Tree(220, 250, 64, 64));
-		Game.getHandler().getEntityManager().addEntity(new Tree(190, 175, 64, 64));
+		for(int x = 0; x<width; x++) {
+			for(int y=0; y<height; y++) {
+				if(Math.random()>0.5)
+					Game.getHandler().getEntityManager().addEntity(new Tree(x*64, y*64, 64, 64));
+			}
+		}
 		
 	}
 
@@ -33,7 +40,9 @@ public class World {
 				if(x>5 && y>5 && x<width-1 && y<height-1)
 					Tile.render(TileType.DIRT, x, y);
 				else
-					Tile.render(TileType.GRASS, x, y);				
+					Tile.render(TileType.GRASS, x, y);	
+//				if(x%5 == 0 && y%5==0)
+//					Game.getHandler().getEntityManager().addEntity(new Tree(x*64, y*64, 64, 64));
 			}
 		}
 		

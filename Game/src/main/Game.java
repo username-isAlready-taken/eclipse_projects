@@ -1,5 +1,7 @@
 package main;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
@@ -22,6 +24,7 @@ public class Game implements Runnable {
 	private static long currentTime;
 	private static int FPS = 60;
 	private static int currentFPS;
+	private boolean showFPS = false;
 	
 //	private int blockX = 0;
 //	private int blockY = 100;
@@ -87,13 +90,14 @@ public class Game implements Runnable {
 //		g.setColor(blockColor);
 //		g.fillRect(blockX, blockY, 150, 150);
 //		
-//		g.setColor(Color.black);
-//		g.setFont(new Font(g.getFont().getFontName(), Font.BOLD, 20));
-//		g.drawString("FPS: "+currentFPS, 10, 50);
-		
-		
 		gameStateManager.render();
 		
+		
+		if(showFPS) {
+			g.setColor(Color.yellow);
+			g.setFont(new Font(g.getFont().getFontName(), Font.BOLD, 20));
+			g.drawString("FPS: "+currentFPS, 10, 50);
+		}
 		
 		bs.show();	//draw on the screen
 		g.dispose(); //dispose graphics object
@@ -156,6 +160,10 @@ public class Game implements Runnable {
 
 	public void setWorldManager(WorldManager worldManager) {
 		this.worldManager = worldManager;
+	}
+
+	public void toggleShowFPS() {
+		this.showFPS = !showFPS;
 	}
 
 }

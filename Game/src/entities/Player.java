@@ -17,7 +17,8 @@ public class Player extends Creature {
 	
 	public Player(int health, double x, double y, int width, int height) {
 		super(health, x, y, width, height);
-		
+//		this.collisions.addHitbox(0, 0, width, height/2);
+		this.collisions.addHitbox(0, height/2, width, height/2);
 	}
 
 	@Override
@@ -30,24 +31,21 @@ public class Player extends Creature {
 			movePlayer(Direction.RIGHT);
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_LEFT))
 			movePlayer(Direction.LEFT);
-		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_ESCAPE))
-			Game.getHandler().getGameStateManager().switchState(GameStates.MENUSTATE);
-		
 	}
 	
 	private void movePlayer(Direction d) {
-		if(d == Direction.UP) {
+		if(d == Direction.UP && !Collisions.intersects(this, Direction.UP, speed)) {
 			this.y = Math.max(0,this.y-speed);	
 		}
-		if(d == Direction.DOWN) {
+		if(d == Direction.DOWN && !Collisions.intersects(this, Direction.DOWN, speed)) {
 			this.y = Math.min(
 						Game.getHandler().getWorldManager().getCurrentWorld().getPixelHeight() - height,
 						this.y+speed);		
 		}
-		if(d == Direction.LEFT) {
+		if(d == Direction.LEFT && !Collisions.intersects(this, Direction.LEFT, speed)) {
 			this.x = Math.max(0,this.x-speed);		
 		}
-		if(d == Direction.RIGHT) {
+		if(d == Direction.RIGHT && !Collisions.intersects(this, Direction.RIGHT, speed)) {
 			this.x = Math.min(
 						Game.getHandler().getWorldManager().getCurrentWorld().getPixelWidth() - width,
 						this.x+speed);			
@@ -57,11 +55,9 @@ public class Player extends Creature {
 	@Override
 	protected void render() {
 		Graphics g = Game.getHandler().getGraphics();
-		g.setColor(Color.BLACK);
-		g.fillRect(
-				(int)getX() - Game.getHandler().getWorldManager().getCamera().getxOffset(),
-				(int)getY() - Game.getHandler().getWorldManager().getCamera().getyOffset(),
-				this.getWidth(), this.getHeight());
+		g.setColor(Color.YELLOW);
+		g.fillRect(this.getDrawX(),	this.getDrawY(), this.getWidth(), this.getHeight());
+		Collisions.showBounds(this);
 	}
 
 }

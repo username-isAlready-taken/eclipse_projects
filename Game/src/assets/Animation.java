@@ -16,7 +16,7 @@ public class Animation {
 		textures = Crop(spriteSheet, width, height);
 		lastTime = System.nanoTime();
 		currentTime = lastTime;
-	}
+	}	
 	
 	public ArrayList<BufferedImage> Crop(BufferedImage spriteSheet, int width, int height) {
 		ArrayList<BufferedImage> textures = new ArrayList<BufferedImage>();

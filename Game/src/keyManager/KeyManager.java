@@ -42,7 +42,9 @@ public class KeyManager implements KeyListener {
 				keyCode == KeyEvent.VK_LEFT ||
 				keyCode == KeyEvent.VK_RIGHT ||
 				keyCode == KeyEvent.VK_ENTER ||
-				keyCode == KeyEvent.VK_ESCAPE)
+				keyCode == KeyEvent.VK_ESCAPE ||
+				keyCode == KeyEvent.VK_F1 ||
+				keyCode == KeyEvent.VK_F2)
 			return true;
 		return false;
 	}

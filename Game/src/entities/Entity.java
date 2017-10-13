@@ -1,9 +1,12 @@
 package entities;
 
+import main.Game;
+
 public abstract class Entity {
 	
 	protected double x, y;
 	protected int width, height;
+	protected Collisions collisions = new Collisions();
 	protected boolean remove = false;
 	
 	public Entity(double x, double y, int width, int height) {
@@ -20,6 +23,14 @@ public abstract class Entity {
 
 	
 	//getters and setters
+
+	public int getDrawX() {
+		return (int)getX() - Game.getHandler().getWorldManager().getCamera().getxOffset();
+	}
+	
+	public int getDrawY() {
+		return (int)getY() - Game.getHandler().getWorldManager().getCamera().getyOffset();
+	}
 	
 	public double getX() {
 		return x;

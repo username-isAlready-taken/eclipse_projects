@@ -1,6 +1,9 @@
 package gamestates;
 
+import java.awt.event.KeyEvent;
+
 import assets.AssetManager;
+import entities.Collisions;
 import entities.EntityManager;
 import main.Game;
 import world.WorldManager;
@@ -18,6 +21,15 @@ public class PlayState extends State {
 	public void update() {
 		Game.getHandler().getEntityManager().update();
 		Game.getHandler().getWorldManager().update();
+
+		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_ESCAPE))
+			Game.getHandler().getGameStateManager().switchState(GameStates.MENUSTATE);
+
+		if(Game.getHandler().getKeyManager().getKeyPressedOnce(KeyEvent.VK_F1))
+			Game.getHandler().toggleShowFPS();
+
+		if(Game.getHandler().getKeyManager().getKeyPressedOnce(KeyEvent.VK_F2))
+			Collisions.toggleShowBounds();
 		
 	}
 
