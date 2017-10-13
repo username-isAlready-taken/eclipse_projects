@@ -2,6 +2,9 @@ package world;
 
 import Tiles.Tile;
 import Tiles.TileType;
+import entities.Player;
+import entities.Tree;
+import main.Game;
 
 public class World {
 	
@@ -11,10 +14,16 @@ public class World {
 	public World(int width, int height) {
 		this.width = width;
 		this.height = height;
+		
+		Game.getHandler().getEntityManager().addEntity(new Player(100, 100, 100, 40, 50));
+		
+		Game.getHandler().getEntityManager().addEntity(new Tree(200, 200, 64, 64));
+		Game.getHandler().getEntityManager().addEntity(new Tree(220, 250, 64, 64));
+		Game.getHandler().getEntityManager().addEntity(new Tree(190, 175, 64, 64));
+		
 	}
 
 	public void update() {
-		// TODO Auto-generated method stub
 		
 	}
 

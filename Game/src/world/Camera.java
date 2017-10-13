@@ -16,15 +16,15 @@ public class Camera {
 		xOffset -= Game.getHandler().getDisplay().getWidth() /2 ;
 		xOffset += Game.getHandler().getEntityManager().getPlayer().getWidth() / 2;
 		xOffset = (xOffset<0) ? 0 : xOffset;
-		xOffset = (xOffset>Game.getHandler().getWorldManager().getWorld().getPixelWidth() - Game.getHandler().getDisplay().getWidth()) ?
-				Game.getHandler().getWorldManager().getWorld().getPixelWidth() - Game.getHandler().getDisplay().getWidth() : xOffset;
+		xOffset = (xOffset>Game.getHandler().getWorldManager().getCurrentWorld().getPixelWidth() - Game.getHandler().getDisplay().getWidth()) ?
+				Game.getHandler().getWorldManager().getCurrentWorld().getPixelWidth() - Game.getHandler().getDisplay().getWidth() : xOffset;
 		
 		yOffset = (int) Game.getHandler().getEntityManager().getPlayer().getY();
 		yOffset -= Game.getHandler().getDisplay().getHeight() /2 ;
 		yOffset += Game.getHandler().getEntityManager().getPlayer().getHeight() / 2;
 		yOffset = (yOffset<0) ? 0 : yOffset;
-		yOffset = (yOffset>Game.getHandler().getWorldManager().getWorld().getPixelHeight() - Game.getHandler().getDisplay().getHeight()) ?
-				Game.getHandler().getWorldManager().getWorld().getPixelHeight() - Game.getHandler().getDisplay().getHeight() : yOffset;
+		yOffset = (yOffset>Game.getHandler().getWorldManager().getCurrentWorld().getPixelHeight() - Game.getHandler().getDisplay().getHeight()) ?
+				Game.getHandler().getWorldManager().getCurrentWorld().getPixelHeight() - Game.getHandler().getDisplay().getHeight() : yOffset;
 		
 	}
 	

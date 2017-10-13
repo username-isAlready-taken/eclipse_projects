@@ -2,12 +2,9 @@ package Tiles;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import assets.AssetManager;
-import gamestates.PlayState;
 import main.Game;
 
 public class Tile {
@@ -42,6 +39,10 @@ public class Tile {
 	
 	public static int getHeight() {
 		return HEIGHT;
+	}
+
+	public TileType getType() {
+		return type;
 	}
 
 }

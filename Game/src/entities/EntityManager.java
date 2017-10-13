@@ -1,12 +1,21 @@
 package entities;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 
 public class EntityManager {
 	
 	private ArrayList<Entity> entities;
 	private Player player;
+	private static Comparator<Entity> entityComparator = new Comparator<Entity>(){
+		@Override
+		public int compare(Entity e1, Entity e2) {
+			if(e1.getY()+e1.getHeight() < e2.getY()+e2.getHeight())
+				return -1;
+			return 1;
+		}
+	};
 
 	public EntityManager() {
 		entities = new ArrayList<Entity>();
@@ -33,6 +42,7 @@ public class EntityManager {
 			}
 			e.update();
 		}
+		entities.sort(entityComparator);
 	}
 	
 	public void render() {

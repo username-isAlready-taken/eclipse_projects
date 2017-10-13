@@ -27,7 +27,7 @@ public class WorldManager {
 		return camera;
 	}
 	
-	public World getWorld() {
+	public World getCurrentWorld() {
 		return currentWorld;
 	}
 

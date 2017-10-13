@@ -5,9 +5,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 import main.Game;
-import gamestates.GameStateManager;
 import gamestates.GameStates;
-import gamestates.PlayState;
 
 enum Direction {
 	LEFT, RIGHT, UP, DOWN;
@@ -43,7 +41,7 @@ public class Player extends Creature {
 		}
 		if(d == Direction.DOWN) {
 			this.y = Math.min(
-						Game.getHandler().getWorldManager().getWorld().getPixelHeight() - height,
+						Game.getHandler().getWorldManager().getCurrentWorld().getPixelHeight() - height,
 						this.y+speed);		
 		}
 		if(d == Direction.LEFT) {
@@ -51,7 +49,7 @@ public class Player extends Creature {
 		}
 		if(d == Direction.RIGHT) {
 			this.x = Math.min(
-						Game.getHandler().getWorldManager().getWorld().getPixelWidth() - width,
+						Game.getHandler().getWorldManager().getCurrentWorld().getPixelWidth() - width,
 						this.x+speed);			
 		}
 	}
