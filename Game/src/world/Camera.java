@@ -1,6 +1,5 @@
 package world;
 
-import gamestates.PlayState;
 import main.Game;
 
 public class Camera {

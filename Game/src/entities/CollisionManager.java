@@ -8,13 +8,13 @@ import java.util.Iterator;
 
 import main.Game;
 
-public class Collisions {
+public class CollisionManager {
 	
 	private ArrayList<Rectangle> collisionBounds;
 	
 	private static boolean showBounds = false;
 	
-	public Collisions() {
+	public CollisionManager() {
 		collisionBounds = new ArrayList<Rectangle>();
 	}
 	
@@ -29,7 +29,7 @@ public class Collisions {
 	public static void showBounds(Entity e) {
 		if(showBounds) {
 			Graphics g = Game.getHandler().getGraphics();
-			Iterator<Rectangle> iterator = e.collisions.collisionBounds.iterator();
+			Iterator<Rectangle> iterator = e.collisionManager.collisionBounds.iterator();
 			g.setColor(Color.cyan);
 			while(iterator.hasNext()) {
 				Rectangle r = iterator.next();
@@ -39,7 +39,7 @@ public class Collisions {
 	}
 	
 	public static boolean intersects(Entity e1, Direction d, double speed) {
-		Iterator<Rectangle> iteratorBounds1 = e1.collisions.collisionBounds.iterator();
+		Iterator<Rectangle> iteratorBounds1 = e1.collisionManager.collisionBounds.iterator();
 		while(iteratorBounds1.hasNext()) {
 			Rectangle bounds1 = new Rectangle(iteratorBounds1.next());
 			if(d == Direction.UP) {
@@ -73,7 +73,7 @@ public class Collisions {
 				) {
 					continue;
 				}
-				Iterator<Rectangle> iteratorBounds2 = e2.collisions.collisionBounds.iterator();
+				Iterator<Rectangle> iteratorBounds2 = e2.collisionManager.collisionBounds.iterator();
 				while(iteratorBounds2.hasNext()) {
 					Rectangle bounds2 = new Rectangle(iteratorBounds2.next());
 					bounds2.setLocation(	(int)(bounds2.getX()+e2.getX()),

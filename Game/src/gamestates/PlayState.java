@@ -3,7 +3,7 @@ package gamestates;
 import java.awt.event.KeyEvent;
 
 import assets.AssetManager;
-import entities.Collisions;
+import entities.CollisionManager;
 import entities.EntityManager;
 import main.Game;
 import world.WorldManager;
@@ -29,7 +29,7 @@ public class PlayState extends State {
 			Game.getHandler().toggleShowFPS();
 
 		if(Game.getHandler().getKeyManager().getKeyPressedOnce(KeyEvent.VK_F2))
-			Collisions.toggleShowBounds();
+			CollisionManager.toggleShowBounds();
 		
 	}
 

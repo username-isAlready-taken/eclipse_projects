@@ -6,7 +6,7 @@ public abstract class Entity {
 	
 	protected double x, y;
 	protected int width, height;
-	protected Collisions collisions = new Collisions();
+	protected CollisionManager collisionManager = new CollisionManager();
 	protected boolean remove = false;
 	
 	public Entity(double x, double y, int width, int height) {

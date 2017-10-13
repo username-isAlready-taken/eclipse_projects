@@ -52,6 +52,7 @@ public class EntityManager {
 		while(i.hasNext()) {
 			Entity e = i.next();
 			e.render();
+			CollisionManager.showBounds(e);
 		}
 	}
 	

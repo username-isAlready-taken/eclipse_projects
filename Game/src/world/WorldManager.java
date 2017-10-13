@@ -1,8 +1,5 @@
 package world;
 
-import entities.Player;
-import main.Game;
-
 public class WorldManager {
 	
 	private Camera camera;

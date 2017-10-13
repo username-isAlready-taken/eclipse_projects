@@ -19,7 +19,7 @@ public class World {
 		this.height = height;
 		
 
-		Game.getHandler().getEntityManager().addEntity(new Player(100, spawnX, spawnY, 25, 32));
+		Game.getHandler().getEntityManager().addEntity(new Player(100, spawnX, spawnY));
 		
 		for(int x = 0; x<width; x++) {
 			for(int y=0; y<height; y++) {
