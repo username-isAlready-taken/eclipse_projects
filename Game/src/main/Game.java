@@ -3,8 +3,11 @@ package main;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import assets.AssetManager;
+import entities.EntityManager;
 import gamestates.GameStateManager;
 import keyManager.KeyManager;
+import world.WorldManager;
 
 public class Game implements Runnable {
 	
@@ -26,7 +29,9 @@ public class Game implements Runnable {
 	
 	private GameStateManager gameStateManager;
 	private KeyManager keyManager;
-	
+	private EntityManager entityManager;
+	private AssetManager assetManager;
+	private WorldManager worldManager;
 	
 	public Game() {
 		display = new Display(title, 960, 720);
@@ -112,6 +117,18 @@ public class Game implements Runnable {
 	public KeyManager getKeyManager() {
 		return keyManager;
 	}
+	
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
+	public AssetManager getAssetManager() {
+		return assetManager;
+	}
+	
+	public WorldManager getWorldManager() {
+		return worldManager;
+	}
 
 	public Display getDisplay() {
 		return display;
@@ -127,6 +144,18 @@ public class Game implements Runnable {
 	
 	public String getTitle() {
 		return title;
+	}
+
+	public void setAssetManager(AssetManager assetManager) {
+		this.assetManager = assetManager;
+	}
+
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+
+	public void setWorldManager(WorldManager worldManager) {
+		this.worldManager = worldManager;
 	}
 
 }

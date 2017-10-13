@@ -6,6 +6,7 @@ import java.util.Iterator;
 public class EntityManager {
 	
 	private ArrayList<Entity> entities;
+	private Player player;
 
 	public EntityManager() {
 		entities = new ArrayList<Entity>();
@@ -13,6 +14,9 @@ public class EntityManager {
 	
 	public void addEntity(Entity e) {
 		entities.add(e);
+		
+		if(e.getClass().getName().equals("entities.Player"))
+			player = (Player) e;
 	}
 	
 	public void removeEntity(Entity e) {
@@ -37,6 +41,13 @@ public class EntityManager {
 			Entity e = i.next();
 			e.render();
 		}
+	}
+	
+	
+	//getters
+	
+	public Player getPlayer() {
+		return player;
 	}
 	
 }

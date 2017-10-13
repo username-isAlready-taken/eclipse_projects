@@ -5,8 +5,8 @@ public abstract class Creature extends Entity {
 	protected int health;
 	protected int maxHealth;
 	
-	public Creature(int health, double x, double y) {
-		super(x, y);
+	public Creature(int health, double x, double y, int width, int height) {
+		super(x, y, width, height);
 		this.health = health;
 		this.maxHealth = health;
 	}
