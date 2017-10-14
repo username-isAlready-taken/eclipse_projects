@@ -14,12 +14,12 @@ enum Direction {
 public class Player extends Creature {
 	
 	protected double speed = 4.5;
-	protected static int width = 64;
-	protected static int height = 64;
+	protected static int width = 128;
+	protected static int height = 128;
 	
 	public Player(int health, double x, double y) {
 		super(health, x, y, width, height);
-		this.collisionManager.addHitbox(width/3, height/5*3, width/3, height/5*2);
+		this.collisionManager.addHitbox(53, 63, 19, 50);
 	}
 
 	@Override
