@@ -1,5 +1,6 @@
 package entities;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -14,6 +15,8 @@ public class Player extends Creature {
 	protected static int width = 128;
 	protected static int height = 128;
 	
+	protected double lastV=0, lastH=0;
+	
 	public Player(int health, double x, double y) {
 		super(health, x, y, width, height);
 		this.collisionManager.addHitbox(53, 63, 19, 50);
@@ -23,45 +26,54 @@ public class Player extends Creature {
 
 	@Override
 	protected void update() {
-		Direction correctDirection = null;
+		double lastV = System.nanoTime();
+		double lastH = lastV;
+		boolean resetLastH = true;
+		boolean resetLastV = true;
 		walking = false;
 
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_DOWN)) {
 			walking = true;
-			if(facing == Direction.LEFT || facing == Direction.RIGHT)
-				correctDirection = Direction.DOWN;
-			facing = Direction.DOWN;
+			this.lastV = (this.lastV==0) ? lastV : this.lastV;
+			resetLastV = false;
+			if(this.lastV > this.lastH)
+				facing = Direction.DOWN;
 			movePlayer(Direction.DOWN);
 		}
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_UP)) {	
 			walking = true;
-			if(facing == Direction.LEFT || facing == Direction.RIGHT)
-				correctDirection = Direction.UP;
-			facing = Direction.UP;
+			this.lastV = (this.lastV==0) ? lastV : this.lastV;
+			resetLastV = false;
+			if(this.lastV > this.lastH)
+				facing = Direction.UP;
 			movePlayer(Direction.UP);
 		}
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_RIGHT)) {
 			walking = true;	
-			facing = Direction.RIGHT;
+			this.lastH = (this.lastH==0) ? lastH : this.lastH;
+			resetLastH = false;
+			if(this.lastV < this.lastH)
+				facing = Direction.RIGHT;
 			movePlayer(Direction.RIGHT);
 		}
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_LEFT)) {	
 			walking = true;	
-			facing = Direction.LEFT;
+			this.lastH = (this.lastH==0) ? lastH : this.lastH;
+			resetLastH = false;
+			if(this.lastV < this.lastH)
+				facing = Direction.LEFT;
 			movePlayer(Direction.LEFT);	
 		}
+		if(resetLastH)
+			this.lastH = 0;
+		if(resetLastV)
+			this.lastV = 0;
 
-		correctFacing(correctDirection);
 		animation.update();
 	}
 	
-	private void correctFacing(Direction d) {
-		if(d != null)
-			facing = d;
-
-	}
-	
 	private void movePlayer(Direction d) {
+		
 		if(d == Direction.UP && !CollisionManager.collides(this, Direction.UP, speed)) {
 			this.y = Math.max(0,this.y-speed);
 			this.animation = AssetManager.playerUp;
@@ -74,20 +86,19 @@ public class Player extends Creature {
 		}
 		if(d == Direction.LEFT && !CollisionManager.collides(this, Direction.LEFT, speed)) {
 			this.x = Math.max(0,this.x-speed);	
-//			this.animation = AssetManager.playerDown;	
+//			this.animation = AssetManager.playerLeft;	
 		}
 		if(d == Direction.RIGHT && !CollisionManager.collides(this, Direction.RIGHT, speed)) {
 			this.x = Math.min(
 						Game.getHandler().getWorldManager().getCurrentWorld().getPixelWidth() - width,
 						this.x+speed);	
-//			this.animation = AssetManager.playerDown;		
+//			this.animation = AssetManager.playerRight;		
 		}
 	}
 
 	@Override
 	protected void render() {
 		Graphics g = Game.getHandler().getGraphics();
-		g.drawString("Facing: "+facing, 100, 100);
 		BufferedImage renderPlayer = null;
 		if(walking == false || facing == Direction.LEFT || facing == Direction.RIGHT) {
 			if(facing == Direction.DOWN)
