@@ -6,9 +6,6 @@ import java.awt.image.BufferedImage;
 import assets.AssetManager;
 import main.Game;
 
-enum Direction {
-	LEFT, RIGHT, UP, DOWN;
-}
 
 public class Player extends Creature {
 	
