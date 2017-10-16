@@ -19,6 +19,7 @@ import Tiles.TileType;
 public class AssetManager {
 	public static BufferedImage grassTile, dirtTile, player;
 	public static Animation tree;
+	public static Animation playerDown;
 	
 	public AssetManager() {
 		grassTile = LoadImage("/grass1.png");
@@ -26,9 +27,28 @@ public class AssetManager {
 		new Tile(grassTile, TileType.GRASS);
 		new Tile(dirtTile, TileType.DIRT);
 		
-		player = makeTransparent(LoadImage("/testPlayer.png"), new Color(255, 255, 255));
 		
-		tree = new Animation(makeTransparent(LoadImage("/treesprite.png"), new Color(255, 255, 255)), 0.4, 64, 64);
+		player = makeTransparent(
+					Animation.Crop(LoadImage("/playerIdle.png"), 128, 128).get(1),
+					new Color(255, 255, 255)
+				);
+		
+		playerDown = new Animation(
+					makeTransparent(
+							LoadImage("/playerDown.png"),
+							new Color(255, 255, 255)
+					),
+					0.2, 128, 128
+				);
+				
+		
+		tree = new Animation(
+					makeTransparent(
+							LoadImage("/treesprite.png"),
+							new Color(255, 255, 255)
+							),
+					0.4, 64, 64
+				);
 		
 	}
 	

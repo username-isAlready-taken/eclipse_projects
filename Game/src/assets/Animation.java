@@ -18,7 +18,7 @@ public class Animation {
 		currentTime = lastTime;
 	}	
 	
-	public ArrayList<BufferedImage> Crop(BufferedImage spriteSheet, int width, int height) {
+	public static ArrayList<BufferedImage> Crop(BufferedImage spriteSheet, int width, int height) {
 		ArrayList<BufferedImage> textures = new ArrayList<BufferedImage>();
 		
 		for(int x=0; x<spriteSheet.getWidth(); x+=width ) {
