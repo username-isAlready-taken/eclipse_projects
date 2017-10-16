@@ -3,8 +3,6 @@ package entities;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-
-import assets.Animation;
 import assets.AssetManager;
 import main.Game;
 
@@ -38,7 +36,7 @@ public class Player extends Creature {
 			movePlayer(Direction.UP);
 			walking = true;
 			facing = Direction.UP;
-//			this.animation = AssetManager.playerDown;
+			this.animation = AssetManager.playerUp;
 		}
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_RIGHT)) {
 			movePlayer(Direction.RIGHT);
@@ -77,13 +75,11 @@ public class Player extends Creature {
 	@Override
 	protected void render() {
 		Graphics g = Game.getHandler().getGraphics();
-		if(walking == false) {
+		if(walking == false || (facing != Direction.DOWN && facing != Direction.UP)) {
 			g.drawImage(AssetManager.player, this.getDrawX(), this.getDrawY(), null);
 		} else {
-			if(facing == Direction.DOWN) {
-				BufferedImage frame = animation.getCurrentFrame();
-				g.drawImage(frame, this.getDrawX(), this.getDrawY(), null);
-			}
+			BufferedImage frame = animation.getCurrentFrame();
+			g.drawImage(frame, this.getDrawX(), this.getDrawY(), null);
 		}
 	}
 
