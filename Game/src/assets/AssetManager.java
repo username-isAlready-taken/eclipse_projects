@@ -29,7 +29,7 @@ public class AssetManager {
 		
 		
 		player = makeTransparent(
-					Animation.Crop(LoadImage("/playerIdle.png"), 128, 128).get(1),
+					LoadImage("/playerIdle.png"),
 					new Color(255, 255, 255)
 				);
 		
