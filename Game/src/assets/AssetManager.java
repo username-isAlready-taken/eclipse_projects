@@ -17,7 +17,8 @@ import Tiles.Tile;
 import Tiles.TileType;
 
 public class AssetManager {
-	public static BufferedImage grassTile, dirtTile, player;
+	public static BufferedImage grassTile, dirtTile;
+	public static BufferedImage playerIdleUp, playerIdleDown, playerIdleLeft, playerIdleRight;
 	public static Animation tree;
 	public static Animation playerDown, playerUp;
 	
@@ -28,10 +29,14 @@ public class AssetManager {
 		new Tile(dirtTile, TileType.DIRT);
 		
 		
-		player = makeTransparent(
+		BufferedImage playerIdle = makeTransparent(
 					LoadImage("/playerIdle.png"),
 					new Color(255, 255, 255)
 				);
+		playerIdleDown = Animation.Crop(playerIdle, 128, 128).get(0);
+		playerIdleUp = Animation.Crop(playerIdle, 128, 128).get(1);
+		playerIdleLeft = Animation.Crop(playerIdle, 128, 128).get(2);
+		playerIdleRight = Animation.Crop(playerIdle, 128, 128).get(3);
 		
 		playerDown = new Animation(
 					makeTransparent(

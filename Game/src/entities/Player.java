@@ -3,6 +3,7 @@ package entities;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+
 import assets.AssetManager;
 import main.Game;
 
@@ -22,49 +23,63 @@ public class Player extends Creature {
 
 	@Override
 	protected void update() {
+		Direction correctDirection = null;
 		walking = false;
+
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_DOWN)) {
+			walking = true;
+			if(facing == Direction.LEFT || facing == Direction.RIGHT)
+				correctDirection = Direction.DOWN;
+			facing = Direction.DOWN;
 			movePlayer(Direction.DOWN);
 		}
-		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_UP)) {
+		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_UP)) {	
+			walking = true;
+			if(facing == Direction.LEFT || facing == Direction.RIGHT)
+				correctDirection = Direction.UP;
+			facing = Direction.UP;
 			movePlayer(Direction.UP);
 		}
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_RIGHT)) {
-			movePlayer(Direction.RIGHT);		
+			walking = true;	
+			facing = Direction.RIGHT;
+			movePlayer(Direction.RIGHT);
 		}
-		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_LEFT)) {
+		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_LEFT)) {	
+			walking = true;	
+			facing = Direction.LEFT;
 			movePlayer(Direction.LEFT);	
 		}
+
+		correctFacing(correctDirection);
 		animation.update();
 	}
 	
+	private void correctFacing(Direction d) {
+		if(d != null)
+			facing = d;
+
+	}
+	
 	private void movePlayer(Direction d) {
-		if(d == Direction.UP && !CollisionManager.intersects(this, Direction.UP, speed)) {
-			this.y = Math.max(0,this.y-speed);	
-			walking = true;
-			facing = Direction.UP;
+		if(d == Direction.UP && !CollisionManager.collides(this, Direction.UP, speed)) {
+			this.y = Math.max(0,this.y-speed);
 			this.animation = AssetManager.playerUp;
 		}
-		if(d == Direction.DOWN && !CollisionManager.intersects(this, Direction.DOWN, speed)) {
+		if(d == Direction.DOWN && !CollisionManager.collides(this, Direction.DOWN, speed)) {
 			this.y = Math.min(
 						Game.getHandler().getWorldManager().getCurrentWorld().getPixelHeight() - height,
 						this.y+speed);	
-			walking = true;
-			facing = Direction.DOWN;
 			this.animation = AssetManager.playerDown;	
 		}
-		if(d == Direction.LEFT && !CollisionManager.intersects(this, Direction.LEFT, speed)) {
-			this.x = Math.max(0,this.x-speed);		
-			walking = true;	
-			facing = Direction.LEFT;
+		if(d == Direction.LEFT && !CollisionManager.collides(this, Direction.LEFT, speed)) {
+			this.x = Math.max(0,this.x-speed);	
 //			this.animation = AssetManager.playerDown;	
 		}
-		if(d == Direction.RIGHT && !CollisionManager.intersects(this, Direction.RIGHT, speed)) {
+		if(d == Direction.RIGHT && !CollisionManager.collides(this, Direction.RIGHT, speed)) {
 			this.x = Math.min(
 						Game.getHandler().getWorldManager().getCurrentWorld().getPixelWidth() - width,
 						this.x+speed);	
-			walking = true;	
-			facing = Direction.RIGHT;
 //			this.animation = AssetManager.playerDown;		
 		}
 	}
@@ -72,12 +87,21 @@ public class Player extends Creature {
 	@Override
 	protected void render() {
 		Graphics g = Game.getHandler().getGraphics();
-		if(walking == false || (facing != Direction.DOWN && facing != Direction.UP)) {
-			g.drawImage(AssetManager.player, this.getDrawX(), this.getDrawY(), null);
+		g.drawString("Facing: "+facing, 100, 100);
+		BufferedImage renderPlayer = null;
+		if(walking == false || facing == Direction.LEFT || facing == Direction.RIGHT) {
+			if(facing == Direction.DOWN)
+				renderPlayer = AssetManager.playerIdleDown;
+			if(facing == Direction.UP)
+				renderPlayer = AssetManager.playerIdleUp;
+			if(facing == Direction.LEFT)
+				renderPlayer = AssetManager.playerIdleLeft;
+			if(facing == Direction.RIGHT)
+				renderPlayer = AssetManager.playerIdleRight;
 		} else {
-			BufferedImage frame = animation.getCurrentFrame();
-			g.drawImage(frame, this.getDrawX(), this.getDrawY(), null);
+			renderPlayer = animation.getCurrentFrame();
 		}
+		g.drawImage(renderPlayer, this.getDrawX(), this.getDrawY(), null);
 	}
 
 }

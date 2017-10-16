@@ -38,7 +38,7 @@ public class CollisionManager {
 		}
 	}
 	
-	public static boolean intersects(Entity e1, Direction d, double speed) {
+	public static boolean collides(Entity e1, Direction d, double speed) {
 		Iterator<Rectangle> iteratorBounds1 = e1.collisionManager.collisionBounds.iterator();
 		while(iteratorBounds1.hasNext()) {
 			Rectangle bounds1 = new Rectangle(iteratorBounds1.next());

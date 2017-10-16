@@ -23,7 +23,7 @@ public class World {
 		
 		for(int x = 0; x<width; x++) {
 			for(int y=0; y<height; y++) {
-				if(Math.random()>0.8)
+				if(Math.random()>0.95)
 					Game.getHandler().getEntityManager().addEntity(new Tree(x*64, y*64, 64, 64));
 			}
 		}
