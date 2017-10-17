@@ -36,32 +36,40 @@ public class Player extends Creature {
 			walking = true;
 			this.lastV = (this.lastV==0) ? lastV : this.lastV;
 			resetLastV = false;
-			if(this.lastV > this.lastH)
+			if(this.lastV > this.lastH) {
 				facing = Direction.DOWN;
+				this.animation = AssetManager.playerDown;
+			}
 			movePlayer(Direction.DOWN);
 		}
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_UP)) {	
 			walking = true;
 			this.lastV = (this.lastV==0) ? lastV : this.lastV;
 			resetLastV = false;
-			if(this.lastV > this.lastH)
+			if(this.lastV > this.lastH) {
 				facing = Direction.UP;
+				this.animation = AssetManager.playerUp;				
+			}
 			movePlayer(Direction.UP);
 		}
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_RIGHT)) {
 			walking = true;	
 			this.lastH = (this.lastH==0) ? lastH : this.lastH;
 			resetLastH = false;
-			if(this.lastV < this.lastH)
+			if(this.lastV < this.lastH) {
 				facing = Direction.RIGHT;
+				this.animation = AssetManager.playerRight;	
+			}
 			movePlayer(Direction.RIGHT);
 		}
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_LEFT)) {	
 			walking = true;	
 			this.lastH = (this.lastH==0) ? lastH : this.lastH;
 			resetLastH = false;
-			if(this.lastV < this.lastH)
+			if(this.lastV < this.lastH) {
 				facing = Direction.LEFT;
+				this.animation = AssetManager.playerLeft;
+			}
 			movePlayer(Direction.LEFT);	
 		}
 		if(resetLastH)
@@ -76,31 +84,29 @@ public class Player extends Creature {
 		
 		if(d == Direction.UP && !CollisionManager.collides(this, Direction.UP, speed)) {
 			this.y = Math.max(0,this.y-speed);
-			this.animation = AssetManager.playerUp;
 		}
 		if(d == Direction.DOWN && !CollisionManager.collides(this, Direction.DOWN, speed)) {
 			this.y = Math.min(
 						Game.getHandler().getWorldManager().getCurrentWorld().getPixelHeight() - height,
-						this.y+speed);	
-			this.animation = AssetManager.playerDown;	
+						this.y+speed);		
 		}
 		if(d == Direction.LEFT && !CollisionManager.collides(this, Direction.LEFT, speed)) {
-			this.x = Math.max(0,this.x-speed);	
-//			this.animation = AssetManager.playerLeft;	
+			this.x = Math.max(0,this.x-speed);		
 		}
 		if(d == Direction.RIGHT && !CollisionManager.collides(this, Direction.RIGHT, speed)) {
 			this.x = Math.min(
 						Game.getHandler().getWorldManager().getCurrentWorld().getPixelWidth() - width,
-						this.x+speed);	
-//			this.animation = AssetManager.playerRight;		
+						this.x+speed);		
 		}
 	}
 
 	@Override
 	protected void render() {
 		Graphics g = Game.getHandler().getGraphics();
+		g.setColor(Color.cyan);
+		g.drawString("facing: "+facing, 100, 100);
 		BufferedImage renderPlayer = null;
-		if(walking == false || facing == Direction.LEFT || facing == Direction.RIGHT) {
+		if(walking == false) {
 			if(facing == Direction.DOWN)
 				renderPlayer = AssetManager.playerIdleDown;
 			if(facing == Direction.UP)

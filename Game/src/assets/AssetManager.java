@@ -20,7 +20,7 @@ public class AssetManager {
 	public static BufferedImage grassTile, dirtTile;
 	public static BufferedImage playerIdleUp, playerIdleDown, playerIdleLeft, playerIdleRight;
 	public static Animation tree;
-	public static Animation playerDown, playerUp;
+	public static Animation playerDown, playerUp, playerLeft, playerRight;
 	
 	public AssetManager() {
 		grassTile = LoadImage("/grass1.png");
@@ -49,6 +49,22 @@ public class AssetManager {
 		playerUp = new Animation(
 					makeTransparent(
 							LoadImage("/playerUp.png"),
+							new Color(255, 255, 255)
+					),
+					0.2, 128, 128
+				);
+		
+		playerLeft = new Animation(
+					makeTransparent(
+							LoadImage("/playerLeft.png"),
+							new Color(255, 255, 255)
+					),
+					0.2, 128, 128
+				);
+		
+		playerRight = new Animation(
+					makeTransparent(
+							LoadImage("/playerRight.png"),
 							new Color(255, 255, 255)
 					),
 					0.2, 128, 128
