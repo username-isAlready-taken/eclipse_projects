@@ -33,9 +33,9 @@ public class Player extends Creature {
 
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_DOWN)) {
 			walking = true;
-			this.lastVerticalMovement = (this.lastVerticalMovement==0) ? currentTime : this.lastVerticalMovement;
+			lastVerticalMovement = (lastVerticalMovement==0) ? currentTime : lastVerticalMovement;
 			resetLastV = false;
-			if(this.lastVerticalMovement > this.lastHorizontalmovement) {
+			if(lastVerticalMovement > lastHorizontalmovement) {
 				facing = Direction.DOWN;
 				this.animation = AssetManager.playerDown;
 			}
@@ -43,9 +43,9 @@ public class Player extends Creature {
 		}
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_UP)) {	
 			walking = true;
-			this.lastVerticalMovement = (this.lastVerticalMovement==0) ? currentTime : this.lastVerticalMovement;
+			lastVerticalMovement = (lastVerticalMovement==0) ? currentTime : lastVerticalMovement;
 			resetLastV = false;
-			if(this.lastVerticalMovement > this.lastHorizontalmovement) {
+			if(lastVerticalMovement > lastHorizontalmovement) {
 				facing = Direction.UP;
 				this.animation = AssetManager.playerUp;				
 			}
@@ -53,9 +53,9 @@ public class Player extends Creature {
 		}
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_RIGHT)) {
 			walking = true;	
-			this.lastHorizontalmovement = (this.lastHorizontalmovement==0) ? currentTime : this.lastHorizontalmovement;
+			lastHorizontalmovement = (lastHorizontalmovement==0) ? currentTime : lastHorizontalmovement;
 			resetLastH = false;
-			if(this.lastVerticalMovement < this.lastHorizontalmovement) {
+			if(lastVerticalMovement < lastHorizontalmovement) {
 				facing = Direction.RIGHT;
 				this.animation = AssetManager.playerRight;	
 			}
@@ -63,18 +63,18 @@ public class Player extends Creature {
 		}
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_LEFT)) {	
 			walking = true;	
-			this.lastHorizontalmovement = (this.lastHorizontalmovement==0) ? currentTime : this.lastHorizontalmovement;
+			lastHorizontalmovement = (lastHorizontalmovement==0) ? currentTime : lastHorizontalmovement;
 			resetLastH = false;
-			if(this.lastVerticalMovement < this.lastHorizontalmovement) {
+			if(lastVerticalMovement < lastHorizontalmovement) {
 				facing = Direction.LEFT;
 				this.animation = AssetManager.playerLeft;
 			}
 			movePlayer(Direction.LEFT);	
 		}
 		if(resetLastH)
-			this.lastHorizontalmovement = 0;
+			lastHorizontalmovement = 0;
 		if(resetLastV)
-			this.lastVerticalMovement = 0;
+			lastVerticalMovement = 0;
 
 		animation.update();
 	}
