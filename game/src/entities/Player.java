@@ -15,7 +15,7 @@ public class Player extends Creature {
 	protected static int width = 128;
 	protected static int height = 128;
 	
-	protected double lastV=0, lastH=0;
+	protected double lastVerticalMovement=0, lastHorizontalmovement=0;
 	
 	public Player(int health, double x, double y) {
 		super(health, x, y, width, height);
@@ -26,17 +26,16 @@ public class Player extends Creature {
 
 	@Override
 	protected void update() {
-		double lastV = System.nanoTime();
-		double lastH = lastV;
+		double currentTime = System.nanoTime();
 		boolean resetLastH = true;
 		boolean resetLastV = true;
 		walking = false;
 
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_DOWN)) {
 			walking = true;
-			this.lastV = (this.lastV==0) ? lastV : this.lastV;
+			this.lastVerticalMovement = (this.lastVerticalMovement==0) ? currentTime : this.lastVerticalMovement;
 			resetLastV = false;
-			if(this.lastV > this.lastH) {
+			if(this.lastVerticalMovement > this.lastHorizontalmovement) {
 				facing = Direction.DOWN;
 				this.animation = AssetManager.playerDown;
 			}
@@ -44,9 +43,9 @@ public class Player extends Creature {
 		}
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_UP)) {	
 			walking = true;
-			this.lastV = (this.lastV==0) ? lastV : this.lastV;
+			this.lastVerticalMovement = (this.lastVerticalMovement==0) ? currentTime : this.lastVerticalMovement;
 			resetLastV = false;
-			if(this.lastV > this.lastH) {
+			if(this.lastVerticalMovement > this.lastHorizontalmovement) {
 				facing = Direction.UP;
 				this.animation = AssetManager.playerUp;				
 			}
@@ -54,9 +53,9 @@ public class Player extends Creature {
 		}
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_RIGHT)) {
 			walking = true;	
-			this.lastH = (this.lastH==0) ? lastH : this.lastH;
+			this.lastHorizontalmovement = (this.lastHorizontalmovement==0) ? currentTime : this.lastHorizontalmovement;
 			resetLastH = false;
-			if(this.lastV < this.lastH) {
+			if(this.lastVerticalMovement < this.lastHorizontalmovement) {
 				facing = Direction.RIGHT;
 				this.animation = AssetManager.playerRight;	
 			}
@@ -64,18 +63,18 @@ public class Player extends Creature {
 		}
 		if(Game.getHandler().getKeyManager().getKeyPressed(KeyEvent.VK_LEFT)) {	
 			walking = true;	
-			this.lastH = (this.lastH==0) ? lastH : this.lastH;
+			this.lastHorizontalmovement = (this.lastHorizontalmovement==0) ? currentTime : this.lastHorizontalmovement;
 			resetLastH = false;
-			if(this.lastV < this.lastH) {
+			if(this.lastVerticalMovement < this.lastHorizontalmovement) {
 				facing = Direction.LEFT;
 				this.animation = AssetManager.playerLeft;
 			}
 			movePlayer(Direction.LEFT);	
 		}
 		if(resetLastH)
-			this.lastH = 0;
+			this.lastHorizontalmovement = 0;
 		if(resetLastV)
-			this.lastV = 0;
+			this.lastVerticalMovement = 0;
 
 		animation.update();
 	}
